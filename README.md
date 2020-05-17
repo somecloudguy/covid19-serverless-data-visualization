@@ -12,7 +12,9 @@ There is a vast amount of data around the number of COVID-19 cases, deaths, hosp
 
 ## How do I build this?
 
-Follow the instructions below. It assumes you have a basic understanding of AWS and have an AWS account.
+Follow the instructions below. It assumes you have a basic understanding of AWS and have an AWS account. This is a high-level architecture of what you will build:
+
+![Architecture diagram]()
 
 ### Step 1: Bookmark the source of data
 
