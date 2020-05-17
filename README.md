@@ -1,5 +1,7 @@
 # Automated COVID-19 Data Visualization using AWS
 
+***IMPORTANT: This is a quick-and-dirty weekend hobby project I did for myself, and offering it to the community on an as-is basis. Please do not expect this to be a production-ready solution. It is not perfect, there might be bugs, things may break over time. If you have a suggestion to make this better, please let me know.*** 
+
 ## What is this?
 
 This is a serverless solution built using AWS to automatically collect, store, and visualize COVID-19 related public data
@@ -33,5 +35,14 @@ QuickSight will preview the data it has pulled from S3. Review all data fields a
 All the data is available now in QuickSight. Go creative with creating whatever types of charts you'd like to see. Here is an example-
 
 ![QuickSight Chart Example](https://octodex.github.com/images/yaktocat.png)
+
+### Step 4: Create a CloudWatch Event to trigger the Lambda function daily
+
+Go to your Lambda function, select +Add Trigger, choose CloudWatch Events and create a new rule with Scheduled expression.
+Copy 0 21 * * ? * as the cron expression. This corresponds to a trigger every day at 21:00 UTC (5:00pm EST). The original dataset updates every day at 4:00pm EST so give yourself some buffer before pulling an update
+
+### Step 5 (optional): Set up an SNS notification to inform you about data update
+
+On your Lambda function, select Add destination, choose SNS topic as the type. Create an SNS topic with your phone number or email as the subscriber. You will now get a text message or an email every time the Lambda function is triggered to pull new data and put it into S3. 
 
 
