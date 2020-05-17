@@ -1,6 +1,6 @@
 # Automated COVID-19 Data Visualization using AWS
 
-***IMPORTANT: This is a quick-and-dirty weekend hobby project I did for myself, and offering it to the community on an as-is basis. Please do not expect this to be a production-ready solution. It is not perfect, there might be bugs, things may break over time. If you have a suggestion to make this better, please let me know.*** 
+***IMPORTANT: This is a quick weekend hobby project I did for myself, and offering it to the community on an as-is basis. Please do not expect this to be a production-ready solution. It is not perfect, there might be bugs, things may break over time. If you have a suggestion to make this better, please let me know.*** 
 
 ## What is this?
 
