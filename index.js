@@ -1,5 +1,7 @@
 // Lambda function. Use nodeJS 12.X
+//LAST UPDATED: 2020-05-18
 
+// Define required libraries
 const AWS = require('aws-sdk');
 const https = require('https');
 var s3 = new AWS.S3({apiVersion: '2006-03-01'});
@@ -7,15 +9,15 @@ var s3 = new AWS.S3({apiVersion: '2006-03-01'});
 // Empty string to populate with downloaded data
 let dataString = '';
 
-// Define S3 bucket to store data
-const uploadBucket = '<UPDATE: DESTINATION_BUCKET_NAME>';
+// Define AWS locations that don't change between each execution of function
+const uploadBucket = '<S3_BUCKET_NAME>';
 
 // Function to download data and upload to S3
 exports.handler = (event, context, callback) => {
     
     // Data is pulled from https://covidtracking.com/. Updated daily at 1600 EST
     
-    // nodeJS function for HTTP GET requests. 
+    // Standard nodeJS function for HTTP GET requests. 
     // Receives data in chunks and concatenates until complete
     const req = https.get("https://covidtracking.com/api/v1/states/daily.json", function(res) {
         res.on('data', chunk => {
@@ -32,20 +34,30 @@ exports.handler = (event, context, callback) => {
             var todayMonth = new Date().getMonth() + 1;
             var todayDate = new Date().getUTCDate();
             var prefixDate = todayYear + '-' + todayMonth + '-' + todayDate;
-            var fileName = prefixDate + '-covid-data-test.json';
+
+            // Define full path within S3 bucket to upload the daily files
+            var dailyKey = '<S3_FOLDER_PATH>/archive/' + prefixDate + '-covid-data.json';
+
+            // Define full path within S3 bucket to upload the master file
+            var masterKey = '<S3_FOLDER_PATH>/data/master-covid-data.json';
             
-            // Define folder path within S3 bucket to upload the file
-            var key = '<UPDATE: S3_PATH/FOLDER/>' + fileName;
-            
-            // Define parameters to upload to S3 based on latest key and dataString values
-            const params = {
+            // Define parameters for daily files
+            const dailyParams = {
                 Bucket : uploadBucket,
-                Key : key,
+                Key : dailyKey,
                 Body : dataString
             };
 
-            // Put data in S3 bucket. Result will go to function callback
-            s3.putObject(params, callback);
+            // Define parameters for master file
+            const masterParams = {
+                Bucket : uploadBucket,
+                Key : masterKey,
+                Body : dataString
+            };
+            // Put daily file in S3
+            s3.putObject(dailyParams, callback);
+            // Put master file in S3
+            s3.putObject(masterParams, callback);
 
             // Write uploaded file size to verify against downloaded file size
             console.log('Data uploaded size:', dataString.length);  
