@@ -2,7 +2,7 @@
     "fileLocations": [
         {
             "URIPrefixes": [
-                "https://s3-us-west-2.amazonaws.com/deskaran-demo/covid-data-demo-may2020/data/"
+                "https://s3-<REGION_NAME>.amazonaws.com/<BUCKET_NAME>/<S3_FOLDER_PATH>/"
             ]
         }
     ],
