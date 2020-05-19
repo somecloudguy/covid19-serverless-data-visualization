@@ -30,7 +30,7 @@ Copy [this code](index.js) into the Lambda function, and update the DESTINATION_
 
 Make sure QuickSight has access to read your S3 bucket. Go to Manage QuickSight on top-right of the console, making sure you are **in N. Virginia region** irrespective of where your S3 and QuickSight is running, review permissions and make sure your S3 bucket is checked in the list
 
-In QuickSight, create New Analysis, New data source, and select S3 as the data source. Download [this sample manifest file](covid-data-quicksight-manifest.json), update it with the location of data on your S3 bucket, and upload it to QuickSight. 
+In QuickSight, create New Analysis, New data source, and select S3 as the data source. Download [this sample manifest file](covid-data-quicksight-manifest.json), update it with the location of data on your S3 bucket, and upload it to QuickSight. You can enable Schedule Refresh on QuickSight data to automatically update to latest data every day.
 
 QuickSight will preview the data it has pulled from S3. Review all data fields and edit if any of them have incorrect data types, especially remember to update "date" field from *number* to *date* type with yyyyMMdd format
 
