@@ -36,7 +36,7 @@ QuickSight will preview the data it has pulled from S3. Review all data fields a
 
 All the data is available now in QuickSight. Go creative with creating whatever types of charts you'd like to see. Here is an example-
 
-![QuickSight Chart Example](quicksight-visualization-sample.png)
+![QuickSight Chart Example](covid-data-visualization-quicksight.png)
 
 ### Step 4: Create a CloudWatch Event to trigger the Lambda function daily
 
